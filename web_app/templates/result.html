@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; }
+        .result-header { background-color: {{ color }}; color: white; padding: 20px; border-radius: 10px 10px 0 0; }
+        .prob-score { font-size: 4rem; font-weight: bold; }
+        .card { border-radius: 12px; overflow: hidden; border: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+
+                <div class="result-header text-center">
+                    <h2>System Status: {{ risk }}</h2>
+                    <p>Analysis performed by Stacking Ensemble (XGBoost + Random Forest)</p>
+                </div>
+
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+
+                        <div class="col-md-5 text-center border-end">
+                            <h4>Failure Probability</h4>
+                            <div class="prob-score" style="color: {{ color }};">
+                                {{ prob }}%
+                            </div>
+                            <p class="text-muted mt-2">
+                                Confidence Level: High<br>
+                                Calibrated via Isotonic Regression
+                            </p>
+                            <a href="/" class="btn btn-outline-secondary mt-3">New Analysis</a>
+                        </div>
+
+                        <div class="col-md-7 text-center">
+                            <img src="data:image/png;base64, {{ chart }}" class="img-fluid" alt="Radar Chart">
+                            <p class="small text-muted mt-2">
+                                *Radar Chart shows deviation from optimal operating conditions (Green Area).
+                                <br>Red dashed line indicates critical threshold.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h5 class="text-secondary">Physics-Informed Metrics</h5>
+                    <div class="row text-center mt-3">
+                        <div class="col-3">
+                            <strong>Power Factor</strong><br>
+                            {{ details['Power_Factor'][0] | round(2) }} W
+                        </div>
+                        <div class="col-3">
+                            <strong>Temp Difference</strong><br>
+                            {{ details['Temp_Diff'][0] | round(2) }} K
+                        </div>
+                        <div class="col-3">
+                            <strong>Tool Strain</strong><br>
+                            {{ details['Tool_Strain'][0] | round(2) }} Nm·min
+                        </div>
+                        <div class="col-3">
+                            <strong>Torque</strong><br>
+                            {{ details['Torque'][0] }} Nm
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
