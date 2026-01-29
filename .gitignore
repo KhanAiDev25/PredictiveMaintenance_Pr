@@ -1,0 +1,19 @@
+# Python Data Science Ignore
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# IDE Settings
+.idea/
+.vscode/
+
+# Dataset (Optional: usually we don't upload large CSVs, but for this demo it's fine)
+# data/
+
+# Models (Optional: If models are >100MB, git rejects them. Ours are small, so keep them.)
+# models/*.pkl
